@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my complaints</title>
+</head>
+<body>
+    <h2>complaints submitted by{{email}}</h2>
+    {% if complaints %}
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>category</th>
+                <th>title</th>
+                <th>status</th>
+                <th>submitted on</th>
+            </tr>
+            {% for c in complaints %}
+            <tr>
+                <td>{{c[0]}}</td>
+                <td>{{c[3]}}</td>
+                <td>{{c[4]}}</td>
+                <td>{{c[6]}}</td>
+                <td>{{c[7]}}</td>
+            </tr>
+            {% endfor %}
+        </table>    
+    {% else %}
+       <p>no complaints found</p>
+    {% endif %}
+</body>
+</html>

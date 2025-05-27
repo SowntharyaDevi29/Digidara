@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin-all complaints</title>
+</head>
+<body>
+     <h2>all complaints(admin view)</h2>
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>student</th>
+                <th>email</th>
+                <th>category</th>
+                <th>title</th>
+                <th>status</th>
+                <th>submitted on</th>
+                <th>update status</th>
+            </tr>
+            {% for c in complaints %}
+            <tr>
+                <td>{{c[0]}}</td>
+                <td>{{c[1]}}</td>
+                <td>{{c[2]}}</td>
+                <td>{{c[3]}}</td>
+                <td>{{c[4]}}</td>
+                <td>{{c[6]}}</td>
+                <td>{{c[7]}}</td>
+                <td>
+                    <form method="POST">
+                        <input type="hidden" name="complaint_id" value="{{c[0]}}">
+                        <select name="status">
+                            <option value="submitted" {% if c[6] =='submitted' %}selected{% endif %}>submitted</option>
+                            <option value="inreview" {% if c[6] =='inreview' %}selected{% endif %}>inreview</option>
+                            <option value="resolved" {% if c[6] =='resolved' %}selected{% endif %}>resolved</option>
+                        </select>
+                        <button type="submit">update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>    
+</body>
+</html>

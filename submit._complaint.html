@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>submit complaint</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <h2>submit your complaint</h2>
+    <form action="/submit" method="POST">
+        <label >name:</label><br>
+        <input type="text" name="name" required> <br> 
+       
+        <label >email:</label><br>
+        <input type="text" name="email" required> <br>
+
+         <label >category:</label><br>
+         <select name="category" required> 
+            <option value="hostel">hostel</option>
+            <option value="mess">mess</option>
+            <option value="library">library</option>
+            <option value="wifi">wifi</option>
+            <option value="exam">exam</option>
+            </select> <br>
+         <label>title</label> <br>
+         <input type="text" name="title" required> <br>
+         <label>description</label> <br>
+         <textarea name="description" rows="5" required></textarea> <br> <br>
+         <input type="submit" value="submit complaint"> 
+</form>
+</body>
+</html>
