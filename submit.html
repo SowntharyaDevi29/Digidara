@@ -1,0 +1,136 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Complaint - Student Complaint System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='submit.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Student Complaint System</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/submit" class="active">Submit Complaint</a></li>
+            <li><a href="/my_complaints">My Complaints</a></li>
+            <li><a href="/admin">Admin Dashboard</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="complaint-form">
+        <h2>Submit a Complaint</h2>
+        <form action="/submit" method="POST">
+
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your student email">
+            </div>
+
+            <div class="form-group">
+                <label for="register_number">Register Number:</label>
+                <input type="text" id="register_number" name="register_number" required placeholder="Enter your register number">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <option value="" disabled selected>Select your department</option>
+                    <option value="CS">CS</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BCOM">BCOM</option>
+                    <option value="BBA">BBA</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <select id="year" name="year" required>
+                    <option value="" disabled selected>Select your year</option>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Canteen">Canteen</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Exam">Exam</option>
+                    <option value="Staffs">Staffs</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Complaint Title:</label>
+                <input type="text" id="title" name="title" required placeholder="Short title for your complaint">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required placeholder="Describe your complaint in detail..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Submit Complaint</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Student Complaint System. All rights reserved.</p>
+</footer>
+
+</body>
+</html><style>/* General Reset */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background-color: #2d3e50;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #4a90</style>
