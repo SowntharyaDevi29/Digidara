@@ -1,28 +1,107 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <title>Home - Student Complaint System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>greeksforgreeks</h1>
-<form action="login" method="POST">
-  <div class="row">
-    <div class="col">
-      <label for="username" class="form-label">username</label>
-      <input id="input1" type="text" name="username" class="form-control" placeholder="username" aria-label="username">
-    </div>
-  </div> 
-  <label for="inputPassword5" class="form-label">Password</label>
-  <input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-  <div id="passwordHelpBlock" class="form-text">
-    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-  </div>   
-  <input type="submit" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" value="submit">
+    <header>
+        <h1>Welcome to the Student Complaint System</h1>
+        <nav>
+            <ul>
+                <li><a href="/submit">Submit Complaint</a></li>
+                <li><a href="/my_complaints">My Complaints</a></li>
+                <li><a href="/admin">Admin Dashboard</a></li>
+                <li><a href="/login" class="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-</form>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="{{ url_for('static', filename='hero.jpg') }}" alt="Students discussing" />
+        <h2>Paperless, Easy, and Transparent Complaint Handling</h2>
+        <p>Submit and track complaints about hostel, mess, exams, and more.</p>
+        <a href="/submit" class="animated-btn">Submit a Complaint</a>
+    </section>
+
+    <main>
+        <section>
+            <h2>How It Works</h2>
+            <p>Students submit complaints using the form. Admins review and resolve them. You can track status anytime.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Student Complaint System. All rights reserved.</p>
+    </footer>
 </body>
-</html>
+</html><style>/* Header and Navigation */
+header {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 0;
+    margin-top: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.login-btn {
+    background: white;
+    color: #4CAF50;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    background-color: #eefdf2;
+    padding: 40px 20px;
+}
+
+.hero img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.animated-btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.animated-btn:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 40px;
+}</style>
