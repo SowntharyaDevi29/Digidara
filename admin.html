@@ -1,0 +1,110 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Student Complaint System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/submit">Submit Complaint</a></li>
+            <li><a href="/my_complaints">My Complaints</a></li>
+            <li><a href="/admin" class="active">Admin Dashboard</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="admin-panel">
+        <h2>All Submitted Complaints</h2>
+
+        {% if complaints %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student</th>
+                        <th>Email</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Submitted On</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in complaints %}
+                    <tr>
+                        <td>{{ c[0] }}</td> <!-- complaint_id -->
+                        <td>{{ c[1] }}</td> <!-- student_name -->
+                        <td>{{ c[2] }}</td> <!-- email -->
+                        <td>{{ c[3] }}</td> <!-- category -->
+                        <td>{{ c[4] }}</td> <!-- title -->
+                        <td>{{ c[6] }}</td> <!-- status -->
+                        <td>{{ c[7] }}</td> <!-- submitted_on -->
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="complaint_id" value="{{ c[0] }}">
+                                <select name="status" class="status-select">
+                                    <option value="Submitted" {% if c[6] == 'Submitted' %}selected{% endif %}>Submitted</option>
+                                    <option value="In Review" {% if c[6] == 'In Review' %}selected{% endif %}>In Review</option>
+                                    <option value="Resolved" {% if c[6] == 'Resolved' %}selected{% endif %}>Resolved</option>
+                                </select>
+                                <button type="submit" class="update-btn">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No complaints found.</p>
+        {% endif %}
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Student Complaint System. All rights reserved.</p>
+</footer>
+
+</body>
+</html><style>.admin-panel {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.admin-panel h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.status-select {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.update-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #388e3c;
+}</style>
