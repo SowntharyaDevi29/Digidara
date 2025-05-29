@@ -1,0 +1,103 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>from flask import Flask, render_template, request, redirect
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+
+# ✅ MySQL Configuration
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''  # Put your MySQL password if any
+app.config['MYSQL_DB'] = 'complaint_db'
+
+mysql = MySQL(app)
+
+# ✅ Home Page
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+# ✅ Submit Complaint (with student verification)
+@app.route('/submit', methods=['GET', 'POST'])
+def submit_complaint():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        register_number = request.form['register_number']
+        department = request.form['department']
+        year = request.form['year']
+        category = request.form['category']
+        title = request.form['title']
+        description = request.form['description']
+
+        cur = mysql.connection.cursor()
+
+        # 🔐 Verify student using students table
+        cur.execute("SELECT * FROM students WHERE register_number = %s AND department = %s AND year = %s",
+                    (register_number, department, year))
+        student = cur.fetchone()
+
+        if not student:
+            return render_template('submit_complaint.html', error="You are not a verified student. Complaint not accepted.")
+
+        # ✅ Insert complaint if student is valid
+        cur.execute("""
+            INSERT INTO complaints (student_name, email, register_number, department, year, category, title, description, status)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'Submitted')
+        """, (name, email, register_number, department, year, category, title, description))
+        mysql.connection.commit()
+
+        return redirect(f'/my_complaints?email={email}')
+
+    return render_template('submit_complaint.html')
+
+# ✅ My Complaints
+@app.route('/my_complaints')
+def my_complaints():
+    email = request.args.get('email')
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM complaints WHERE email = %s", (email,))
+    complaints = cur.fetchall()
+    return render_template('my_complaints.html', complaints=complaints, email=email)
+
+# ✅ Admin Dashboard - View and Update Status
+@app.route('/admin', methods=['GET', 'POST'])
+def admin_dashboard():
+    cur = mysql.connection.cursor()
+
+    if request.method == 'POST':
+        complaint_id = request.form['complaint_id']
+        new_status = request.form['status']
+        cur.execute("UPDATE complaints SET status = %s WHERE complaint_id = %s", (new_status, complaint_id))
+        mysql.connection.commit()
+
+    cur.execute("SELECT * FROM complaints ORDER BY submitted_on DESC")
+    complaints = cur.fetchall()
+    return render_template('admin_complaints.html', complaints=complaints)
+
+# ✅ Run Flask App
+if __name__ == '__main__':
+    app.run(debug=True)<style>CREATE DATABASE complaint_db;
+USE complaint_db;
+
+CREATE TABLE students (
+    register_number VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(100),
+    department VARCHAR(50),
+    year VARCHAR(10)
+);
+
+INSERT INTO students VALUES ('22BCA123', 'Priya Sharma', 'BCA', '2nd');
+
+CREATE TABLE complaints (
+    complaint_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(100),
+    email VARCHAR(100),
+    register_number VARCHAR(20),
+    department VARCHAR(50),
+    year VARCHAR(10),
+    category VARCHAR(50),
+    title VARCHAR(100),
+    description TEXT,
+    status VARCHAR(20) DEFAULT 'Submitted',
+    submitted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</style>
