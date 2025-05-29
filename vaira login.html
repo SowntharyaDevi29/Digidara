@@ -1,0 +1,114 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+  <title>Student Certification Tracker</title>
+</head>
+<body>
+
+  <h1>Student Certification Tracker</h1>
+  <p>Only verified students can submit their certificates.</p>
+
+  <h2>Submit Your Certification</h2>
+
+  <form>
+    <label for="name">Full Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="aadhar">Aadhaar Number (12 digits):</label><br>
+    <input type="text" id="aadhar" name="aadhar" maxlength="12" required><br><br>
+
+    <label for="regno">Registration Number:</label><br>
+    <input type="text" id="regno" name="regno" required><br><br>
+
+    <label for="course_category">Course Category:</label><br>
+    <select id="course_category" name="course_category" required>
+      <option value="">-- Select --</option>
+      <option value="bsc">BSc</option>
+      <option value="msc">MSc</option>
+      <option value="iti">ITI</option>
+      <option value="diploma">Diploma</option>
+      <option value="bca">BCA</option>
+      <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="course_name">Course Name:</label><br>
+    <input type="text" id="course_name" name="course_name" required><br><br>
+
+    <label for="provider">Course Provider:</label><br>
+    <input type="text" id="provider" name="provider" required><br><br>
+
+    <label for="certificate_link">Certificate Link (URL):</label><br>
+    <input type="url" id="certificate_link" name="certificate_link" required><br><br>
+
+    <input type="submit" value="Submit Certification">
+  </form>
+
+</body>
+</html><style>body {
+  font-family: Arial, sans-serif;
+  background-color: #eef6fb;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #003366;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: #003366;
+  margin-top: 20px;
+}
+
+.form-container {
+  background-color: white;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="url"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  background-color: #003366;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover {
+  background-color: #0059b3;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  color: #777;
+}</style>
