@@ -1,0 +1,140 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Certification Tracker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e6f0f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0c4a6e;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #0c4a6e;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      background-color: #0c4a6e;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #155e87;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Student Certification Tracker</h1>
+    <p>Submit your online course certifications (Only for verified students)</p>
+  </header>
+
+  <div class="container">
+    <h2>Submit Your Certification</h2>
+    <form onsubmit="return validateForm()">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="aadhar">Aadhaar Number:</label>
+      <input type="text" id="aadhar" maxlength="12" pattern="\d{12}" required>
+
+      <label for="regno">Registration Number:</label>
+      <input type="text" id="regno" required>
+
+      <label for="course_category">Course Category:</label>
+      <select id="course_category" required>
+        <option value="">-- Select --</option>
+        <option>BSc</option>
+        <option>MSc</option>
+        <option>ITI</option>
+        <option>Diploma</option>
+        <option>BCA</option>
+        <option>Other</option>
+      </select>
+
+      <label for="course_name">Course Name:</label>
+      <input type="text" id="course_name" required>
+
+      <label for="provider">Course Provider:</label>
+      <input type="text" id="provider" required>
+
+      <label for="certificate_link">Certificate Link (URL):</label>
+      <input type="url" id="certificate_link" required>
+
+      <input type="submit" value="Submit Certification">
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Student Certification Tracker | Only verified students can submit
+  </footer>
+
+  <script>
+    function validateForm() {
+      const aadhar = document.getElementById('aadhar').value.trim();
+      const regno = document.getElementById('regno').value.trim();
+
+      if (!/^\d{12}$/.test(aadhar)) {
+        alert("Please enter a valid 12-digit Aadhaar number.");
+        return false;
+      }
+
+      if (regno === "") {
+        alert("Registration number is required.");
+        return false;
+      }
+
+      alert("Certification submitted successfully!");
+      return false; // Change to true if connected to backend
+    }
+  </script>
+
+</body>
+</html>
