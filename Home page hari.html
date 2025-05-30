@@ -1,0 +1,156 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Submission Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+        }
+        .container {
+            margin-top: 80px;
+        }
+        .card {
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container text-center">
+        <h1 class="mb-4">Hackathon Project Submission Portal</h1>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card shadow p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Register Team</h5>
+                        <p class="card-text">Register your team to participate in the hackathon.</p>
+                        <a href="/register_team" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Submit Project</h5>
+                        <p class="card-text">Already registered? Submit your project details here.</p>
+                        <a href="/submit_project/1" class="btn btn-success">Submit</a>
+                        <!-- NOTE: You should replace "1" with dynamic team_id logic in your Flask app -->
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Submission Confirmation</h5>
+                        <p class="card-text">Check confirmation of your successful project submission.</p>
+                        <a href="/confirmation" class="btn btn-info">View Confirmation</a>
+                        <!-- You may want to generate this page dynamically -->
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow p-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Admin Dashboard</h5>
+                        <p class="card-text">View all registered teams and submitted projects.</p>
+                        <a href="/admin_dashboard" class="btn btn-dark">Go to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html><style>body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8f5;
+    color: #333;
+    margin: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 10px 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #388e3c;
+}
+
+.welcome {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.welcome h2 {
+    margin-bottom: 20px;
+}
+
+.welcome ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+}
+
+.welcome ul li {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.start-button {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.start-button:hover {
+    background-color: #2e7d32;
+}
+
+footer {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    margin-top: 50px;
+}</style>

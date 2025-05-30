@@ -1,0 +1,122 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Project | Hackathon Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-group a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-group a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Submission</h1>
+        <p>Submit your project details below.</p>
+
+        <form action="" method="POST">
+            <label for="project_title">Project Title</label>
+            <input type="text" id="project_title" name="project_title" required>
+
+            <label for="description">Project Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="github_link">GitHub or Demo Link</label>
+            <input type="text" id="github_link" name="github_link" required>
+
+            <input type="submit" value="Submit Project">
+        </form>
+
+        <div class="btn-group">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
