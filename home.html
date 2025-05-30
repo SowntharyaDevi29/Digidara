@@ -1,144 +1,40 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home - Student Complaint System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Student Certification Login</title>
+    <link rel="stylesheet" href="/static/home.css">
+    
 </head>
 <body>
-    <header>
-        <h1>Student Complaint System</h1>
-        <nav>
-            <ul>
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/submit">Submit Complaint</a></li>
-                <li><a href="/my_complaints">My Complaints</a></li>
-                <li><a href="/admin">Admin Dashboard</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="welcome">
-            <h2>Welcome, Students!</h2>
-            <p>This system allows only verified students to submit complaints about college services including:</p>
-            <ul>
-                <li>🏏 Sports</li>
-                <li>🍽️ Canteen</li>
-                <li>🏠 Hostel</li>
-                <li>📝 Exam</li>
-                <li>👨‍🏫 Staffs</li>
-                <li>📌 Other</li>
-            </ul>
-            <p>You must enter your <strong>Register Number</strong>, <strong>Department</strong>, and <strong>Year</strong> to continue.</p>
-            <a href="/submit" class="start-button">Submit a Complaint</a>
-        </section>
-    </main>
+<div class="container">
+    <h2>Student Certification Login</h2>
+    <form>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required> <br><br>
 
-    <footer>
-        <p>© 2025 Student Complaint System. All rights reserved.</p>
-    </footer>
+        <label for="regno">Registration Number:</label>
+        <input type="text" id="regno" name="regno" required><br><br>
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" required> <br><br>
+
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" required> <br><br>
+
+        <label for="aadhar">Aadhar Number:</label>
+        <input type="text" id="aadhar" name="aadhar" maxlength="12" required> <br><br>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required> <br><br>
+
+        <label for="certificate_link">Certificate Link (URL):</label>
+        <input type="url" id="certificate_link" name="certificate_link" required> <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
 </body>
-</html><style>/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Style */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f8f5;
-    color: #333;
-}
-
-/* Header */
-header {
-    background-color: #4CAF50;
-    padding: 20px 0;
-    color: white;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 28px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 15px;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #388e3c;
-}
-
-/* Welcome Section */
-.welcome {
-    max-width: 750px;
-    margin: 40px auto;
-    background-color: #ffffff;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.welcome h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #222;
-}
-
-.welcome p {
-    font-size: 16px;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.welcome ul {
-    text-align: left;
-    list-style: none;
-    margin: 20px auto;
-    padding-left: 0;
-    max-width: 400px;
-}
-
-.welcome ul li {
-    padding: 8px 0;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-}
-
-/* Start Button */
-.start-button {
-    display: inline-block;
-    margin-top: 25px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.start-button:hover {
-    background-color: #</style>
+</html>
