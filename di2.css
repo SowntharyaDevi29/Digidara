@@ -1,0 +1,75 @@
+/* Reset basic defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e8f0fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fdfdfd;
+}
+
+/* Submit button styling */
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for button */
+button:hover {
+    background-color: #0056b3;
+}
