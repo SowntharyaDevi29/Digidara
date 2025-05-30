@@ -1,0 +1,84 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>View Feedback</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback.css') }}">
+</head>
+<body>
+  <h2>All Submitted Feedback</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Faculty</th>
+        <th>Rating</th>
+        <th>Comments</th>
+        <th>Submitted At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in feedback %}
+      <tr>
+        <td>{{ entry.student_name }}</td>
+        <td>{{ entry.faculty_name }}</td>
+        <td>{{ entry.rating }}</td>
+        <td>{{ entry.feedback_text }}</td>
+        <td>{{ entry.submitted_at }}</td>
+      </tr>
+      {% endfor %}
+      {% if feedback|length == 0 %}
+      <tr><td colspan="5" class="no-data">No feedback submitted yet.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</body>
+</html><style>body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  padding: 40px;
+  margin: 0;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #007BFF;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+td {
+  color: #555;
+}
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #999;
+}</style>
