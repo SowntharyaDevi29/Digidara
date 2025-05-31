@@ -1,0 +1,60 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>from flask import Flask, render_template, request, redirect
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+
+# MySQL Configuration
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'yourpassword'  # Change this
+app.config['MYSQL_DB'] = 'cert_tracker_db'
+
+mysql = MySQL(app)
+
+# Route 1: Submit Certification
+@app.route('/submit', methods=['GET', 'POST'])
+def submit_cert():
+    if request.method == 'POST':
+        name = request.form['name']
+        course = request.form['course']
+        department = request.form['department']
+        email = request.form['email']
+        aadhar = request.form['aadhar']
+        regno = request.form['regno']
+        link = request.form['certificate_link']
+
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            INSERT INTO students (name, course, department, email, aadhar, regno, certificate_link)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (name, course, department, email, aadhar, regno, link))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(f'/my_certifications?email={email}')
+    return render_template('submit_certification.html')
+
+# Route 2: View Student's Certifications
+@app.route('/my_certifications')
+def my_certifications():
+    email = request.args.get('email')
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM students WHERE email = %s", (email,))
+    certs = cur.fetchall()
+    cur.close()
+    return render_template('my_certifications.html', certs=certs, email=email)
+
+# Route 3: Admin View - All students sorted by department
+@app.route('/admin')
+def admin_view():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM students ORDER BY department ASC")
+    all_certs = cur.fetchall()
+    cur.close()
+    return render_template('admin_certifications.html', certs=all_certs)
+
+@app.route('/')
+def home():
+    return redirect('/submit')
+
+if __name__ == '__main__':
+    app.run(debug=True)
