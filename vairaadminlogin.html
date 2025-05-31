@@ -1,0 +1,62 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - Grouped by Department</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h2>Admin Dashboard - Students by Department</h2>
+
+    {% for department, student_list in grouped_students.items() %}
+        <h3>{{ department }}</h3>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Email</th>
+                <th>Reg No</th>
+                <th>Aadhar</th>
+                <th>Certificate</th>
+            </tr>
+            {% for student in student_list %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.course }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.regno }}</td>
+                <td>{{ student.aadhar }}</td>
+                <td><a href="{{ student.cert_link }}" target="_blank">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    {% endfor %}
+
+</body>
+</html><style>h3 {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #f1f1f1;
+    text-align: left;
+}
+
+td, th {
+    padding: 8px;
+}</style>
