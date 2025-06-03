@@ -1,0 +1,118 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Feedback</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: bgMove 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      width: 360px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #66a6ff;
+      box-shadow: 0 0 8px rgba(102, 166, 255, 0.5);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      font-size: 16px;
+      background: linear-gradient(to right, #56ccf2, #2f80ed);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(47, 128, 237, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <form class="form-container" action="submit_feedback.html" method="POST">
+    <h2>Faculty Feedback</h2>
+
+    <label for="facultySelect">Select Faculty</label>
+    <select name="faculty" id="facultySelect" required>
+      <option value="">-- Choose Faculty --</option>
+      <option value="john_doe">John Doe</option>
+      <option value="jane_smith">Jane Smith</option>
+      <option value="michael_brown">Michael Brown</option>
+      <option value="emily_davis">Emily Davis</option>
+    </select>
+
+    <label for="studentName">Your Name</label>
+    <input type="text" id="studentName" name="student_name" required />
+
+    <label for="rating">Rating</label>
+    <select name="rating" id="rating" required>
+      <option value="">-- Choose Rating --</option>
+      <option value="5">Excellent (5)</option>
+      <option value="4">Very Good (4)</option>
+      <option value="3">Good (3)</option>
+      <option value="2">Fair (2)</option>
+      <option value="1">Poor (1)</option>
+    </select>
+
+    <label for="comments">Comments</label>
+    <textarea id="comments" name="comments" rows="4" required></textarea>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+</body>
+</html>
