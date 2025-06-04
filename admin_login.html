@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login - Student Complaint System</title>
+    <link rel="stylesheet" href="/static/admin_login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        {% if error %}
+            <p class="error-msg">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <label for="admin_id">Admin ID:</label>
+            <input type="text" id="admin_id" name="admin_id" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
