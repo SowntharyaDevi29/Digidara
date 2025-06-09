@@ -1,0 +1,153 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">🛠️ Admin Dashboard</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/admin_logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="animate">
+            <h2>All Complaints</h2>
+
+            {% if complaints %}
+            <table class="complaints-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Submitted On</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint[0] }}</td>
+                        <td>{{ complaint[1] }}</td>
+                        <td>{{ complaint[2] }}</td>
+                        <td>{{ complaint[3] }}</td>
+                        <td>{{ complaint[4] }}</td>
+                        <td class="status {{ complaint[6]|lower|replace(' ', '-') }}">{{ complaint[6] }}</td>
+                        <td>{{ complaint[7].strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <form method="POST" action="/admin">
+                                <input type="hidden" name="complaint_id" value="{{ complaint[0] }}">
+                                <select name="status" required>
+                                    <option value="Submitted" {% if complaint[6] == 'Submitted' %}selected{% endif %}>Submitted</option>
+                                    <option value="In Review" {% if complaint[6] == 'In Review' %}selected{% endif %}>In Review</option>
+                                    <option value="Resolved" {% if complaint[6] == 'Resolved' %}selected{% endif %}>Resolved</option>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>No complaints found.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html><style>/* Update button style */
+form select {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+
+form button {
+    background-color: #2e7d32;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #1b5e20;
+}
+
+/* Table update */
+.complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.complaints-table th,
+.complaints-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    border-radius: 6px;
+}
+
+.complaints-table thead {
+    background-color: #66bb6a;
+    color: white;
+}
+
+.complaints-table tbody tr:nth-child(even) {
+    background-color: #f0f9f0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .complaints-table, .complaints-table thead, .complaints-table tbody, .complaints-table th, .complaints-table td, .complaints-table tr {
+        display: block;
+    }
+    .complaints-table thead tr {
+        display: none;
+    }
+    .complaints-table tbody tr {
+        margin-bottom: 25px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        background: white;
+    }
+    .complaints-table tbody td {
+        border: none;
+        padding-left: 50%;
+        position: relative;
+        text-align: right;
+        margin-bottom: 8px;
+    }
+    .complaints-table tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: 700;
+        text-align: left;
+    }
+    form button {
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%;
+    }
+}</style>

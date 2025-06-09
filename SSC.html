@@ -1,0 +1,194 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Complaint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">📝 Submit Complaint</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="animate">
+            <h2>File Your Complaint</h2>
+            <form method="POST" action="/submit_complaint">
+                <label for="name">Full Name:</label><br>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="reg_no">Registration Number:</label><br>
+                <input type="text" id="reg_no" name="reg_no" required><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="department">Department:</label><br>
+                <input type="text" id="department" name="department" required><br>
+
+                <label for="year">Year:</label><br>
+                <input type="text" id="year" name="year" required><br>
+
+                <label for="category">Category:</label><br>
+                <select id="category" name="category" required>
+                    <option value="">--Select Category--</option>
+                    <option value="Staff">👨‍🏫 Staff</option>
+                    <option value="Sports">🏅 Sports</option>
+                    <option value="Canteen">🍽️ Canteen</option>
+                    <option value="Exam">📝 Exam</option>
+                    <option value="Water Facility">🚰 Water Facility</option>
+                    <option value="Other">📌 Other</option>
+                </select><br><br>
+
+                <label for="title">Complaint Title:</label><br>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="5" required></textarea><br>
+
+                <button type="submit">Submit Complaint</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html><style>/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background-color: #e8f5e9; /* light green background */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #66bb6a;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e0f2f1;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 128, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Elements */
+form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #66bb6a;
+    outline: none;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #388e3c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2e7d32;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate {
+    animation: fadeIn 1s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+}</style>
