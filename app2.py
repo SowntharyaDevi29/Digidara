@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  
+app.secret_key = 'a5a4s8r6h1q2d3h8'  
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -10,6 +10,7 @@ app.config['MYSQL_PASSWORD'] = 'Dhanush@1'
 app.config['MYSQL_DB'] = 'complaint_db'
 
 mysql = MySQL(app)
+
 
 
 @app.route('/')
@@ -59,41 +60,67 @@ def my_complaints():
     return render_template('my_complaint.html', complaints=complaints, email=email)
 
 
-@app.route('/admin_login', methods=['GET', 'POST'])
-def admin_login():
-    if request.method == 'POST':
-        admin_id = request.form['admin_id']
-        password = request.form['password']
+# @app.route('/admin_login', methods=['GET', 'POST'])
+# def admin_login():
+#     if request.method == 'POST':
+#         admin_id = request.form['admin_id']
+#         password = request.form['password']
 
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM admins WHERE admin_id = %s AND password = %s", (admin_id, password))
-        admin = cur.fetchone()
+#         cur = mysql.connection.cursor()
+#         cur.execute("SELECT * FROM admins WHERE admin_id = %s AND password = %s", (admin_id, password))
+#         admin = cur.fetchone()
 
-        if admin:
-            session['admin_logged_in'] = True
-            return redirect('/adminlogin')
-        else:
-            return render_template('adminlogin.html', error="Invalid ID or password")
+#         if admin:
+#             session['admin_logged_in'] = True
+#             return redirect('/admin_login')
+#         else:
+#             return render_template('admin_dash.html', error="Invalid ID or password")
 
-    return render_template('adminlogin.html')
+#     return render_template('admin_login.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
-def admin_dashboard():
+def admin():
+    print(session)  # Debug: Check session contents
     if not session.get('admin_logged_in'):
-        return redirect('/adminlogin')
+        return redirect('/admin_login')
 
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
-        complaint_id = request.form['complaint_id']
-        new_status = request.form['status']
-        cur.execute("UPDATE complaints SET status = %s WHERE complaint_id = %s", (new_status, complaint_id))
-        mysql.connection.commit()
+        complaint_id = request.form.get('complaint_id')
+        new_status = request.form.get('status')
+        print(f"POST data: complaint_id={complaint_id}, status={new_status}")  # Debug
+        if complaint_id and new_status:
+            allowed_statuses = ['pending', 'resolved', 'in_progress']
+            if new_status in allowed_statuses:
+                try:
+                    cur.execute("SELECT 1 FROM complaints WHERE complaint_id = %s", (complaint_id,))
+                    if not cur.fetchone():
+                        flash("Complaint ID does not exist.", "error")
+                    else:
+                        cur.execute("UPDATE complaints SET status = %s WHERE complaint_id = %s", (new_status, complaint_id))
+                        mysql.connection.commit()
+                        flash("Status updated successfully.", "success")
+                except Exception as e:
+                    flash(f"Error updating status: {str(e)}", "error")
+                finally:
+                    cur.close()
+            else:
+                flash("Invalid status selected.", "error")
+                cur.close()
+        else:
+            flash("Missing complaint ID or status.", "error")
+            cur.close()
 
+    cur = mysql.connection.cursor()  # Reopen cursor for GET
     cur.execute("SELECT * FROM complaints ORDER BY submitted_on DESC")
     complaints = cur.fetchall()
-    return render_template('admindash.html', complaints=complaints)
+    cur.close()
+    return render_template('admin_dash.html', complaints=complaints)
 
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    return render_template('admin_login.html')
 
 @app.route('/admin_logout')
 def admin_logout():

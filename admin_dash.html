@@ -2,75 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard - Student Complaint System</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
-<header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/submit">Submit Complaint</a></li>
-            <li><a href="/my_complaint">My Complaints</a></li>
-            <li><a href="/admin_login" class="active">Admin Dashboard</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <section class="admin-panel">
-        <h2>All Submitted Complaints</h2>
-
+    <header>
+        <h1>STUDENT COMPLAINT SYSTEM</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/submit">Submit Complaint</a></li>
+                <li><a href="/search_complaint">My Complaints</a></li>
+                <li><a href="/admin_login">Admin Dashboard</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container" style="width: 70%;">
+        <h2 style="width: 70%;margin-left: 20%;">Admin Dashboard</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div style="margin-left: 20%;" class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         {% if complaints %}
-            <table>
-                <thead>
+            <table style="max-width: 100%;margin-left: 10%;">
+                <tr>
+                    <th>Complaint ID</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Submitted On</th>
+                    <th style="padding-left: 50px;padding-right: 50px;">Action</th>
+                </tr>
+                {% for complaint in complaints %}
                     <tr>
-                        <th>ID</th>
-                        <th>Student</th>
-                        <th>Email</th>
-                        <th>Category</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Submitted On</th>
-                        <th>Update Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for c in complaints %}
-                    <tr>
-                        <td>{{ c[0] }}</td> <!-- complaint_id -->
-                        <td>{{ c[1] }}</td> <!-- student_name -->
-                        <td>{{ c[2] }}</td> <!-- email -->
-                        <td>{{ c[3] }}</td> <!-- category -->
-                        <td>{{ c[4] }}</td> <!-- title -->
-                        <td>{{ c[6] }}</td> <!-- status -->
-                        <td>{{ c[7] }}</td> <!-- submitted_on -->
+                        <td>{{ complaint[0] }}</td>
+                        <td>{{ complaint[1] }}</td>
+                        <td>{{ complaint[2] }}</td>
+                        <td>{{ complaint[7] }}</td>
+                        <td>{{ complaint[6] }}</td>
+                        <td>{{ complaint[9] }}</td>
+                        <td>{{ complaint[10] }}</td>
                         <td>
-                            <form method="POST">
-                                <input type="hidden" name="complaint_id" value="{{ c[0] }}">
-                                <select name="status" class="status-select">
-                                    <option value="Submitted" {% if c[6] == 'Submitted' %}selected{% endif %}>Submitted</option>
-                                    <option value="In Review" {% if c[6] == 'In Review' %}selected{% endif %}>In Review</option>
-                                    <option value="Resolved" {% if c[6] == 'Resolved' %}selected{% endif %}>Resolved</option>
+                            <form method="POST" action="{{ url_for('admin') }}">
+                                <input type="hidden" name="complaint_id" value="{{ complaint[0] }}">
+                                <select name="status">
+                                    <option value="Submitted" {% if complaint[9] == 'Submitted' %}selected{% endif %}>Submitted</option>
+                                    <option value="Pending" {% if complaint[9] == 'Pending' %}selected{% endif %}>Pending</option>
+                                    <option value="In Progress" {% if complaint[9] == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                    <option value="Resolved" {% if complaint[9] == 'Resolved' %}selected{% endif %}>Resolved</option>
                                 </select>
-                                <button type="submit" class="update-btn">Update</button>
+                                <button type="submit">Update</button>
                             </form>
                         </td>
                     </tr>
-                    {% endfor %}
-                </tbody>
+                {% endfor %}
             </table>
         {% else %}
             <p>No complaints found.</p>
         {% endif %}
-    </section>
-</main>
-
-<footer>
-    <p>© 2025 Student Complaint System. All rights reserved.</p>
-</footer>
-
+        <p><a href="{{ url_for('admin_logout') }}">Logout</a></p>
+    </div>
 </body>
 </html>
