@@ -1,0 +1,31 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>CREATE DATABASE IF NOT EXISTS complaint_db;
+USE complaint_db;
+
+-- Students table for signup/login
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Complaints table
+CREATE TABLE complaints (
+    complaint_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    register_number VARCHAR(50),
+    department VARCHAR(50),
+    year VARCHAR(10),
+    category VARCHAR(50),
+    title VARCHAR(200),
+    description TEXT,
+    status VARCHAR(50) DEFAULT 'Pending',
+    submitted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Admin table (for admin login)
+CREATE TABLE admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
