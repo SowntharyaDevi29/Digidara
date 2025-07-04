@@ -1,0 +1,46 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>CREATE DATABASE IF NOT EXISTS complaint_db;
+USE complaint_db;
+
+CREATE TABLE IF NOT EXISTS students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    register_number VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    department VARCHAR(100) NOT NULL,
+    year VARCHAR(20) NOT NULL
+);
+
+INSERT INTO students (name, username, password, register_number, email, department, year)
+VALUES 
+('Asha R', 'asha123', 'pass123', 'REG001', 'asha@example.com', 'CSE', '2023'),
+('Rahul K', 'rahul456', 'pass456', 'REG002', 'rahul@example.com', 'ECE', '2022');
+
+CREATE TABLE IF NOT EXISTS admins (
+    admin_id VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL
+);
+
+INSERT INTO admins (admin_id, password)
+VALUES ('admin1', 'adminpass');
+
+CREATE TABLE IF NOT EXISTS complaints (
+    complaint_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(100),
+    email VARCHAR(100),
+    register_number VARCHAR(50),
+    department VARCHAR(100),
+    year VARCHAR(20),
+    category VARCHAR(50),
+    title VARCHAR(100),
+    description TEXT,
+    status VARCHAR(50) DEFAULT 'Submitted',
+    submitted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+SELECT * FROM students 
+WHERE name = 'Asha R' 
+  AND register_number = 'REG001' 
+  AND department = 'CSE' 
+  AND year = '2023';
