@@ -1,0 +1,54 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>-- Table for user authentication
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL -- Stores hashed passwords
+);
+
+-- Table for student verification (used to validate complaint submissions)
+CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    register_number VARCHAR(20) UNIQUE NOT NULL, -- Unique identifier for students
+    department VARCHAR(50) NOT NULL,
+    year VARCHAR(10) NOT NULL
+);
+
+-- Table for storing complaints
+CREATE TABLE IF NOT EXISTS complaints (
+    complaint_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    register_number VARCHAR(20) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    year VARCHAR(10) NOT NULL,
+    category VARCHAR(50) NOT NULL, -- e.g., "Academic", "Infrastructure", "Discipline"
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    status VARCHAR(20) DEFAULT 'Submitted', -- Possible statuses: 'Submitted', 'Pending', 'In Progress', 'Resolved'
+    submitted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Automatically records submission time
+);
+
+-- Table for administrator authentication
+CREATE TABLE IF NOT EXISTS admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    admin_id VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL -- Stores admin passwords (consider hashing these too in a real application)
+);
+
+
+-- Select your database
+USE complaint_db;
+
+-- Insert sample student data
+-- You can add more students by repeating the INSERT statement
+INSERT INTO students (register_number, department, year) VALUES
+('STU001', 'Computer Science', 'Third'),
+('STU002', 'Electronics', 'Second'),
+('STU003', 'Mechanical', 'Final'),
+('STU004', 'Information Technology', 'First');
+
+-- Insert sample admin data
+-- For production, hash the admin password!
+INSERT INTO admins (admin_id, password) VALUES
+('admin', 'password123'),
+('manager', 'secureadmin');
